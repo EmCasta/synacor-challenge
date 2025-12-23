@@ -1,0 +1,41 @@
+
+thread 'rustc' panicked at /rustc-dev/29483883eed69d5fb4db01964cdf2af4d86e9cb2/compiler/rustc_query_system/src/dep_graph/serialized.rs:284:21:
+Error: A dep graph node (explicit_predicates_of) does not have an unique index. Running a clean build on a nightly compiler with `-Z incremental-verify-ich` can help narrow down the issue for reporting. A clean build may also work around the issue.
+
+                     DepNode: DepKind { variant: 70 }(1685dda40f97852e-ddfad8633f16171f)
+stack backtrace:
+   0:     0x781a444d8203 - <std::sys::backtrace::BacktraceLock::print::DisplayBacktrace as core::fmt::Display>::fmt::hf435e8e9347709a8
+   1:     0x781a44c02bff - core::fmt::write::h0a51fad3804c5e7c
+   2:     0x781a460d1591 - std::io::Write::write_fmt::h9759e4151bf4a45e
+   3:     0x781a444d8062 - std::sys::backtrace::BacktraceLock::print::h1ec5ce5bb8ee285e
+   4:     0x781a444dbb5a - std::panicking::default_hook::{{closure}}::h5ffefe997a3c75e4
+   5:     0x781a444db6df - std::panicking::default_hook::h820c77ba0601d6bb
+   6:     0x781a435c9103 - std[da76efc55aba569b]::panicking::update_hook::<alloc[679dddab44c6194d]::boxed::Box<rustc_driver_impl[aa7064ecaea87566]::install_ice_hook::{closure#1}>>::{closure#0}
+   7:     0x781a444dc3ab - std::panicking::rust_panic_with_hook::h8b29cbe181d50030
+   8:     0x781a444dc0aa - std::panicking::begin_panic_handler::{{closure}}::h9f5b6f6dc6fde83e
+   9:     0x781a444d86d9 - std::sys::backtrace::__rust_end_short_backtrace::hd7b0c344383b0b61
+  10:     0x781a444dbd8d - __rustc[5224e6b81cd82a8f]::rust_begin_unwind
+  11:     0x781a40c91480 - core::panicking::panic_fmt::hc49fc28484033487
+  12:     0x781a4604261b - rustc_incremental[b7ddd32c3f7375e9]::persist::load::setup_dep_graph
+  13:     0x781a45ee8d3f - rustc_interface[5344109f4998426e]::interface::run_compiler::<(), rustc_driver_impl[aa7064ecaea87566]::run_compiler::{closure#0}>::{closure#1}
+  14:     0x781a45e366b8 - std[da76efc55aba569b]::sys::backtrace::__rust_begin_short_backtrace::<rustc_interface[5344109f4998426e]::util::run_in_thread_with_globals<rustc_interface[5344109f4998426e]::util::run_in_thread_pool_with_globals<rustc_interface[5344109f4998426e]::interface::run_compiler<(), rustc_driver_impl[aa7064ecaea87566]::run_compiler::{closure#0}>::{closure#1}, ()>::{closure#0}, ()>::{closure#0}::{closure#0}, ()>
+  15:     0x781a45e36396 - <<std[da76efc55aba569b]::thread::Builder>::spawn_unchecked_<rustc_interface[5344109f4998426e]::util::run_in_thread_with_globals<rustc_interface[5344109f4998426e]::util::run_in_thread_pool_with_globals<rustc_interface[5344109f4998426e]::interface::run_compiler<(), rustc_driver_impl[aa7064ecaea87566]::run_compiler::{closure#0}>::{closure#1}, ()>::{closure#0}, ()>::{closure#0}::{closure#0}, ()>::{closure#1} as core[4727a1a5e2f8bf41]::ops::function::FnOnce<()>>::call_once::{shim:vtable#0}
+  16:     0x781a45e3c385 - std::sys::pal::unix::thread::Thread::new::thread_start::h1ff51d6e85162efd
+  17:     0x781a3f69caa4 - start_thread
+                               at ./nptl/pthread_create.c:447:8
+  18:     0x781a3f729c6c - clone3
+                               at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78:0
+  19:                0x0 - <unknown>
+
+error: the compiler unexpectedly panicked. this is a bug.
+
+note: we would appreciate a bug report: https://github.com/rust-lang/rust/issues/new?labels=C-bug%2C+I-ICE%2C+T-compiler&template=ice.md
+
+note: rustc 1.89.0 (29483883e 2025-08-04) running on x86_64-unknown-linux-gnu
+
+note: compiler flags: -C embed-bitcode=no -C debuginfo=2 -C incremental=[REDACTED]
+
+note: some of the compiler flags provided by cargo are hidden
+
+query stack during panic:
+end of query stack
