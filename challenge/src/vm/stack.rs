@@ -28,3 +28,34 @@ impl Stack {
         self.stack.is_empty()
     }
 }
+
+mod tests {
+
+
+    #[test]
+    fn can_create() {
+        let stack = super::Stack::new();
+        assert!(stack.is_empty());
+    }
+
+    #[test]
+    fn can_push_and_pop() {
+        let mut stack = super::Stack::new();
+        stack.push(1);
+        assert_eq!(stack.pop(), 1);
+    }
+
+    #[test]
+    fn can_test_if_stack_is_empty() {
+        let mut stack = super::Stack::new();
+        stack.push(1);
+        assert!(!stack.is_empty());
+    }
+
+    #[test]
+    #[should_panic]
+    fn panics_if_popped_when_empty() {
+        let mut stack = super::Stack::new();
+        stack.pop();
+    }
+}

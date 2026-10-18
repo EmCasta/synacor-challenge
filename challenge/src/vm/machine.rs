@@ -4,20 +4,20 @@ use crate::vm::register::Register;
 use crate::vm::stack::Stack;
 use std::io::Read;
 
-/// VM's amount of registers
+/// VM's number of registers
 pub const CANT_REGS: usize = 8;
 /// Maximum value of a 15-bit number
 pub const MAX_U15: usize = 32767;
 
-/// Implementation of the VM, wich has three storage regions:
+/// Implementation of the VM, which has three storage regions:
 /// - memory with 15-bit address space storing 16-bit values
-/// - eight registers
-/// - an unbounded stack which holds individual 16-bit values
+/// - Eight registers
+/// - An unbounded stack that holds individual 16-bit values
 ///
 /// All numbers are unsigned integers (0..32767), 15-bit, and all math is modulo 32768.
 /// - Numbers 0..32767 mean a literal value
 /// - Numbers 32768..32775 mean registers 0..7
-/// - Numbers 32776..65535 are invalid
+/// - Numbers 32776..65,535 are invalid
 pub struct Machine {
     instruction_ptr: u16,
     ram: Ram,
@@ -197,18 +197,18 @@ impl Machine {
         }
     }
 
-    /// Returns true if the address given is a literal (within the 0..32767 range), false otherwise
+    /// Returns true if the address given is a literal (within the 0..32,767 ranges), false otherwise
     pub fn is_literal(address: u16) -> bool {
         (0..MAX_U15 + 1).contains(&(address as usize))
     }
 
-    /// Returns true if the number is a valid register (within 32768..32775), false otherwise
+    /// Returns true if the number is a valid register (within 32,768..32,775), false otherwise
     pub fn is_valid_register(number: u16) -> bool {
         (MAX_U15 + 1..MAX_U15 + CANT_REGS + 1).contains(&(number as usize))
     }
 
     /// Given a number, if it's a literal, returns the same number.
-    /// If it's a register, returns the content of thre register. Otherwise, panics.
+    /// If it's a register, returns the content of the register. Otherwise, panics.
     pub fn get_value(&self, number: u16) -> u16 {
         if Self::is_literal(number) {
             number
